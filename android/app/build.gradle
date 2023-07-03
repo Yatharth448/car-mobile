@@ -145,8 +145,8 @@ android {
         applicationId "com.caronrent"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -218,6 +218,12 @@ android {
         }
     }
     signingConfigs {
+        release {
+             storeFile file('karayana.keystore')
+             storePassword 'karayana@sanjay'
+             keyAlias 'karayana'
+             keyPassword 'karayana@sanjay'
+    }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -232,6 +238,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.release
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
